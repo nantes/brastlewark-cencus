@@ -13,3 +13,8 @@ export const fetchPopulationError = (error) => ({
   type: types.FETCH_POPULATION_ERROR,
   error,
 });
+
+export const filterPopulationByName = (searchValue) => ({
+  type: types.FILTER_POPULATION_BY_NAME,
+  searchValue,
+});
