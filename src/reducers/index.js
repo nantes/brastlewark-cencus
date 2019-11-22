@@ -1,5 +1,5 @@
 import types from '../actions/types';
-import { searchPopulationByName, getProfessionList , filterPopulationByProfession } from '../selectors';
+import { searchPopulationByName, getProfessionList, filterPopulationByProfession } from '../selectors';
 
 const initialState = {
   population: [],
