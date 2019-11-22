@@ -1,7 +1,9 @@
 import React from 'react';
+import styles from './styles.css';
+import loadingImage from './loading.gif';
 
 export default () => (
-  <div className="loading-spinner">
-    <img src="loading.gif" alt="" />
+  <div className={styles.loading}>
+    <img src={loadingImage} alt="" />
   </div>
 );
