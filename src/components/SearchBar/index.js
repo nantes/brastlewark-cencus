@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { filterPopulationByName } from '../../actions';
+import ProfessionFilter from '../ProfessionFilter';
 
 class SearchBar extends PureComponent {
   render() {
-    const { searchValue, filterPopulationByName } = this.props;
+    const { searchValue, searchByName } = this.props;
     return (
       <section>
         <div>
@@ -19,10 +19,13 @@ class SearchBar extends PureComponent {
                 aria-label="search-input"
                 type="text"
                 placeholder="search by name"
-                onChange={(e) => filterPopulationByName(e.target.value)}
+                onChange={(e) => searchByName(e.target.value)}
                 value={searchValue}
               />
             </div>
+          </div>
+          <div>
+            <ProfessionFilter />
           </div>
         </div>
       </section>
@@ -32,11 +35,15 @@ class SearchBar extends PureComponent {
 
 SearchBar.propTypes = {
   searchValue: PropTypes.string.isRequired,
-  filterPopulationByName: PropTypes.func.isRequired,
+  searchByName: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({ searchValue: state.searchValue });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ filterPopulationByName }, dispatch);
+const mapDispatchToProps = (dispatch) => ({
+  searchByName: (value) => {
+    dispatch(filterPopulationByName(value));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

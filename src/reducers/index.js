@@ -1,11 +1,12 @@
 import types from '../actions/types';
-import searchPopulationByName from '../selectors';
+import { searchPopulationByName, getProfessionList , filterPopulationByProfession } from '../selectors';
 
 const initialState = {
   population: [],
   filteredPopulation: [],
   searchValue: '',
   loading: false,
+  professionsList: [],
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +21,7 @@ export default (state = initialState, action) => {
         ...state,
         population: action.payload.Brastlewark,
         filteredPopulation: searchPopulationByName(action.payload.Brastlewark, state.searchValue),
+        professionsList: getProfessionList(action.payload.Brastlewark),
         loading: false,
 
       };
@@ -30,6 +32,12 @@ export default (state = initialState, action) => {
         ...state,
         searchValue: action.searchValue,
         filteredPopulation: searchPopulationByName(state.population, action.searchValue),
+      };
+    case types.FILTER_POPULATION_BY_PROFESSION:
+      return {
+        ...state,
+        filteredPopulation: filterPopulationByProfession(state.population,
+          action.profession, state.searchValue),
       };
     default:
       return state;

@@ -18,3 +18,8 @@ export const filterPopulationByName = (searchValue) => ({
   type: types.FILTER_POPULATION_BY_NAME,
   searchValue,
 });
+
+export const filterPopulationByProfession = (profession) => ({
+  type: types.FILTER_POPULATION_BY_PROFESSION,
+  profession,
+});

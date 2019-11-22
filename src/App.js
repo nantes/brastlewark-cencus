@@ -3,9 +3,7 @@ import PopulationContainer from './containers/PopulationContainer';
 
 function App() {
   return (
-    <div>
-      <PopulationContainer />
-    </div>
+    <PopulationContainer />
   );
 }
 
