@@ -1,8 +1,11 @@
 import React from 'react';
+import PopulationContainer from './containers/PopulationContainer';
 
 function App() {
   return (
-    <div />
+    <div>
+      <PopulationContainer />
+    </div>
   );
 }
 
