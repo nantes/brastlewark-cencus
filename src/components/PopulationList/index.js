@@ -12,9 +12,9 @@ const PopulationList = (props) => {
   const { population } = props;
   const [modalActive, setModalActive] = useState(false);
   const [modalData, setModalData] = useState({});
-  const [listItems, setListItems] = useState(Array.from(Array(5).keys(), (n) => n));
+  const [listItems, setListItems] = useState(Array.from(Array(20).keys(), (n) => n));
   const fetchMore = () => {
-    setListItems((prevState) => ([...prevState, ...Array.from(Array(5).keys(), (n) => n + prevState.length)]));
+    setListItems((prevState) => ([...prevState, ...Array.from(Array(20).keys(), (n) => n + prevState.length)]));
     setIsFetching(false);
   };
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMore);
