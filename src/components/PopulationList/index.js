@@ -1,14 +1,23 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GnomeCard from '../GnomeCard';
 import Spinner from '../Spinner';
 import GnomeModal from '../GnomeModal';
+import useInfiniteScroll from '../../utils/infiniteScroll';
 import './styles.css';
 
 const PopulationList = (props) => {
+  const { population } = props;
   const [modalActive, setModalActive] = useState(false);
-  const [modalData, setModalData ] = useState({});
+  const [modalData, setModalData] = useState({});
+  const [listItems, setListItems] = useState(Array.from(Array(5).keys(), (n) => n + 1));
+  const fetchMore = () => {
+    setListItems((prevState) => ([...prevState, ...Array.from(Array(5).keys(), (n) => n + prevState.length + 1)]));
+    setIsFetching(false);
+  };
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMore);
   const openModal = (data) => {
     setModalData(data);
     setModalActive(true);
@@ -17,14 +26,15 @@ const PopulationList = (props) => {
     setModalActive(false);
     setModalData({});
   };
-  const { loading, population } = props;
+  const { loading } = props;
   return (
     <div className="population-list">
-      {!loading
-        ? population.map((gnome) => (
-          <GnomeCard key={gnome.id} gnome={gnome} openModal={openModal} />
+      {(!loading && population.length)
+        ? listItems.map((index) => (
+          <GnomeCard key={population[index].id} gnome={population[index]} openModal={openModal} />
         ))
         : <Spinner />}
+      {isFetching && 'Fetching more list items...'}
       {modalActive && <GnomeModal gnome={modalData} active={modalActive} closeModal={closeModal} />}
     </div>
   );
