@@ -1,28 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import PopulationList from '../../components/PopulationList';
 import SearchBar from '../../components/SearchBar';
 
-class PopulationContainer extends PureComponent  {
-  render() {
-    const { population, loading } = this.props;
-    return (
-      <>
-        <SearchBar />
-        <PopulationList population={population} loading={loading} />
-      </>
-    );
-  }
-}
-PopulationContainer.propTypes = {
-  population: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loading: PropTypes.bool.isRequired,
+const PopulationContainer = () => {
+  const population = useSelector((state) => state.filteredPopulation);
+  const loading = useSelector((state) => state.loading);
+  return (
+    <>
+      <SearchBar />
+      <PopulationList population={population} loading={loading} />
+    </>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  population: state.filteredPopulation,
-  loading: state.loading,
-});
-
-export default connect(mapStateToProps)(PopulationContainer);
+export default PopulationContainer;
