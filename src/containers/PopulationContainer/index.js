@@ -10,7 +10,7 @@ class PopulationContainer extends PureComponent  {
     return (
       <>
         <SearchBar />
-        <PopulationList population={population} loading={loading}/>
+        <PopulationList population={population} loading={loading} />
       </>
     );
   }

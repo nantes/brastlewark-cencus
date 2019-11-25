@@ -1,0 +1,6 @@
+.population-search-field {
+  justify-content: space-between;
+}
+.population-search-field .profession-filter {
+  flex-grow: 0;
+}

@@ -1,0 +1,15 @@
+.gnome-card {
+  height: max-content;
+  cursor: pointer;
+  transition: transform 400ms ease;
+}
+.gnome-card:hover {
+  transform: scale(1.05);
+}
+.gnome-card .image {
+  overflow: hidden;
+  border-radius: 6px 6px 0 0;
+}
+.gnome-card img {
+  object-fit: cover;
+}

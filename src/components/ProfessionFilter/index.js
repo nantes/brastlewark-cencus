@@ -20,9 +20,9 @@ class ProfessionFilter extends PureComponent {
   render() {
     const { professionsList } = this.props;
     return (
-      <div>
-        <div>
-          <div>
+      <div className="field">
+        <div className="control">
+          <div className="select is-primary is-rounded">
             <select onChange={this.handleInputChange}>
               <option>All professions</option>
               {professionsList.map((p, i) => <option key={`profession_${i}`}>{p}</option>)}
