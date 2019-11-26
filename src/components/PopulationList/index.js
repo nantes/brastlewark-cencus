@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import GnomeCard from '../GnomeCard';
 import Spinner from '../Spinner';
@@ -12,7 +12,10 @@ const PopulationList = (props) => {
   const { population, loading } = props;
   const [modalActive, setModalActive] = useState(false);
   const [modalData, setModalData] = useState({});
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(0);
+  useEffect(() => {
+    setPageSize(20);
+  }, [population]);
   const fetchMore = () => {
     setPageSize((previousState) => previousState + 20);
     setIsFetching(false);
@@ -42,4 +45,5 @@ PopulationList.propTypes = {
   population: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
 };
+
 export default PopulationList;
