@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-undef */
 
-import App from './src/App';
+import App from './App';
 
 describe('<App /> rendering', () => {
   it('should render', () => {
