@@ -1,5 +1,5 @@
 import types from '../actions/types';
-import { searchPopulationByName, getProfessionList, filterPopulationByProfession } from '../selectors';
+import { getProfessionList, filterPopulation } from '../selectors';
 
 const initialState = {
   population: [],
@@ -7,6 +7,7 @@ const initialState = {
   searchValue: '',
   loading: false,
   professionsList: [],
+  professionSelected: '',
 };
 
 export default (state = initialState, action) => {
@@ -20,7 +21,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         population: action.payload.Brastlewark,
-        filteredPopulation: searchPopulationByName(action.payload.Brastlewark, state.searchValue),
+        filteredPopulation: filterPopulation(action.payload.Brastlewark,
+          state.searchValue, state.professionSelected),
         professionsList: getProfessionList(action.payload.Brastlewark),
         loading: false,
 
@@ -31,13 +33,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         searchValue: action.searchValue,
-        filteredPopulation: searchPopulationByName(state.population, action.searchValue),
+        filteredPopulation: filterPopulation(state.population,
+          action.searchValue, state.professionSelected),
       };
     case types.FILTER_POPULATION_BY_PROFESSION:
       return {
         ...state,
-        filteredPopulation: filterPopulationByProfession(state.population,
-          action.profession, state.searchValue),
+        professionSelected: action.profession,
+        filteredPopulation: filterPopulation(state.population,
+          state.searchValue, action.profession),
       };
     default:
       return state;

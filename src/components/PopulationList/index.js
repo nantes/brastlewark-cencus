@@ -9,12 +9,12 @@ import useInfiniteScroll from '../../utils/infiniteScroll';
 import './styles.css';
 
 const PopulationList = (props) => {
-  const { population } = props;
+  const { population, loading } = props;
   const [modalActive, setModalActive] = useState(false);
   const [modalData, setModalData] = useState({});
-  const [listItems, setListItems] = useState(Array.from(Array(20).keys(), (n) => n));
+  const [pageSize, setPageSize] = useState(20);
   const fetchMore = () => {
-    setListItems((prevState) => ([...prevState, ...Array.from(Array(20).keys(), (n) => n + prevState.length)]));
+    setPageSize((previousState) => previousState + 20);
     setIsFetching(false);
   };
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMore);
@@ -26,12 +26,11 @@ const PopulationList = (props) => {
     setModalActive(false);
     setModalData({});
   };
-  const { loading } = props;
   return (
     <div className="population-list">
       {(!loading && population.length)
-        ? listItems.map((index) => (
-          <GnomeCard key={population[index].id} gnome={population[index]} openModal={openModal} />
+        ? population.filter((gnome, index) => index < pageSize).map((gnome) => (
+          <GnomeCard key={gnome.id} gnome={gnome} openModal={openModal} />
         ))
         : <Spinner />}
       {isFetching && 'Fetching more list items...'}
