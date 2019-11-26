@@ -28,7 +28,7 @@ const PopulationList = (props) => {
   };
   return (
     <div className="population-list">
-      {(!loading && population.length)
+      {(!loading)
         ? population.filter((gnome, index) => index < pageSize).map((gnome) => (
           <GnomeCard key={gnome.id} gnome={gnome} openModal={openModal} />
         ))
