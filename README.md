@@ -28,5 +28,8 @@
 ---
 ---
 
-###### TO-Do
-  * 
+###### TO-DO
+  * Do more Unit Testing and Integration Tests
+  * Refactor (some components still are class components, move to functional if its possible)
+  * Keep refactoring redux dispatchs and props binding in components with hooks
+  * Improve UI
